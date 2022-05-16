@@ -1,0 +1,243 @@
+@charset "UTF-8";
+/* general */
+body {
+    font-family: Helvetica, sans-serif;
+}
+main {
+    position: relative;
+    overflow: hidden;
+    padding: 30px;
+}
+.overlay {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+@media only screen and (max-width: 751px) {
+    main {
+        padding: 4vw;
+    }
+}
+
+/* receipt */
+.rcp--ttl {
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.rcp__list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+.rcp__list li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 32%;
+    margin-right: 2%;
+    margin-bottom: 20px;
+}
+.rcp__list li:hover {
+    opacity: 0.6;
+}
+.rcp__list li img {
+    width: 100%;
+}
+.rcp__list li:nth-child(3n) {
+    margin-right: 0;
+}
+.rcp__list--ttl {
+    width: 100%;
+    background-color: #aaa;
+    padding: 1em;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.rcp__list--img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 751px) {
+    .rcp--ttl {
+        margin-bottom: 4vw;
+        font-size: 4vw;
+    }
+    .rcp__list {
+        justify-content: space-between;
+    }
+    .rcp__list li {
+        width: 48%;
+        margin-right: 0;
+        margin-bottom: 2.667vw;
+    }
+    .rcp__list--ttl {
+        font-size: 2.667vw;
+    }
+}
+
+/* detail */
+.rcp__detail--inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.rcp__detail > li {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 90vh;
+    background-color: #FFF;
+    padding: 20px;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+.rcp__detail--close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1;
+}
+.rcp__detail--img {
+    width: 70%;
+    max-width: 570px;
+    margin-right: 20px;
+}
+.rcp__detail--img img {
+    width: 100%;
+}
+.rcp__text {
+    flex: 1;
+}
+.rcp__text--ttl {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000;
+    font-size: 30px;
+    font-weight: bold;
+}
+.rcp__text--desc {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+.rcp__ins li,
+.rcp__ing--legend,
+.rcp__text--legend {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+.rcp__ins li:last-child,
+.rcp__ing--legend:last-child,
+.rcp__text--legend:last-child {
+    margin-bottom: 0;
+}
+.rcp__col {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex;
+}
+.rcp__ins,
+.rcp__ing {
+    width: 48%;
+}
+.rcp__ins--ttl,
+.rcp__ing--ttl {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000;
+    font-size: 20px;
+    font-weight: bold;
+}
+.rcp__ins li,
+.rcp__ing li {
+    padding: 5px;
+}
+.rcp__ing li:nth-child(2n) {
+    background-color: #ddd;
+}
+
+@media only screen and (max-width: 751px) {
+    .rcp__detail--inner {
+        display: block;
+        margin-bottom: 2.667vw;
+    }
+    .rcp__detail > li {
+        padding: 4vw;
+    }
+    .rcp__detail--close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 2vw;
+        font-size: 2.667vw;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1;
+    }
+    .rcp__detail--img {
+        width: 100%;
+        max-width: initial;
+        margin-right: 0;
+        margin-bottom: 1.333vw;
+    }
+    .rcp__text--ttl {
+        margin-bottom: 2vw;
+        padding-bottom: 1.333vw;
+        font-size: 4vw;
+    }
+    .rcp__text--desc {
+        margin-bottom: 2vw;
+        font-size: 2.667vw;
+    }
+    .rcp__ins li,
+    .rcp__ing--legend,
+    .rcp__text--legend {
+        margin-bottom: 1.333vw;
+        font-size: 2.133vw;
+    }
+    .rcp__col {
+        display: block;
+    }
+    .rcp__ing {
+        margin-bottom: 2vw;
+    }
+    .rcp__ins,
+    .rcp__ing {
+        width: 100%;
+    }
+    .rcp__ins--ttl,
+    .rcp__ing--ttl {
+        margin-bottom: 2vw;
+        padding-bottom: 1.333vw;
+        font-size: 2.667vw;
+    }
+    .rcp__ins li,
+    .rcp__ing li {
+        padding: 0.667vw;
+    }
+}
