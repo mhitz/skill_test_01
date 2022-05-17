@@ -1,3 +1,161 @@
+'use strict';
+
+const e = React.createElement;
+const domRecipes = document.querySelector('#react_recipes');
+const rootRecipes = ReactDOM.createRoot(domRecipes);
+const domDetail = document.querySelector('#react_detail');
+const rootDetail = ReactDOM.createRoot(domDetail);
+
+const processData = (dataRecipes, dataSpecials) => {
+    console.log(dataRecipes);
+    console.log(dataSpecials);
+
+    this.listItems = dataRecipes.map(dataRecipes => {
+        return e(
+            'li',
+            { key: dataRecipes.uuid },
+            [
+                e(
+                    'p',
+                    { className: 'rcp__list--ttl', key: dataRecipes.uuid + "_ttl" },
+                    dataRecipes.title
+                ),
+                e(
+                    'div',
+                    { className: 'rcp__list--img', key: dataRecipes.uuid + "_img" },
+                    e(
+                        'img',
+                        { src: dataRecipes.images.medium },
+                        null
+                    )
+                )
+            ])
+    });
+
+    rootRecipes.render(e(
+        'ul',
+        { className: 'rcp__list' },
+        this.listItems
+    ))
+
+    this.listInfo = dataRecipes.map(dataRecipes => {
+        return e(
+            'li',
+            { className: 'rcp__detail--item', key: dataRecipes.uuid + "_data" },
+            [
+                e(
+                    'div',
+                    { className: 'rcp__detail--inner', key: dataRecipes.uuid + "_data_inr" },
+                    [
+                        e(
+                            'p',
+                            { className: 'rcp__detail--close', key: dataRecipes.uuid + "_data_close" },
+                            "X"
+                        ),
+                        e(
+                            'div',
+                            { className: 'rcp__detail--img', key: dataRecipes.uuid + "_data_img" },
+                            e(
+                                'img',
+                                { src: dataRecipes.images.medium, className: 'rcp__detail--img' },
+                                null
+                            )
+                        ),
+                        e(
+                            'div',
+                            { className: 'rcp__text', key: dataRecipes.uuid + "_data_text" },
+                            [
+                                e(
+                                    'p',
+                                    { className: 'rcp__text--ttl', key: dataRecipes.uuid + "_data_text01" },
+                                    dataRecipes.title
+                                ),
+                                e(
+                                    'p',
+                                    { className: 'rcp__text--desc', key: dataRecipes.uuid + "_data_text02" },
+                                    dataRecipes.description
+                                ),
+                                e(
+                                    'p',
+                                    { className: 'rcp__text--legend', key: dataRecipes.uuid + "_data_text03" },
+                                    "servings : " + dataRecipes.servings
+                                ),
+                                e(
+                                    'p',
+                                    { className: 'rcp__text--legend', key: dataRecipes.uuid + "_data_text04" },
+                                    "prep time : " + dataRecipes.prepTime
+                                ),
+                                e(
+                                    'p',
+                                    { className: 'rcp__text--legend', key: dataRecipes.uuid + "_data_text05" },
+                                    "cook time : " + dataRecipes.cookTime
+                                )
+                            ]
+                        )
+                    ]
+                ),
+                e(
+                    'div',
+                    { className: 'rcp__col', key: dataRecipes.uuid + "_data_col" },
+                    [
+                        e(
+                            'div',
+                            { className: 'rcp__ing', key: dataRecipes.uuid + "_data_ing" },
+                            [
+                                e(
+                                    'p',
+                                    { className: 'rcp__ing--ttl', key: dataRecipes.uuid + "_data_ing--ttl" },
+                                    "Ingredients"
+                                )
+                            ]
+                        ),
+                        e(
+                            'div',
+                            { className: 'rcp__ins', key: dataRecipes.uuid + "_data_ins" },
+                            [
+                                e(
+                                    'p',
+                                    { className: 'rcp__ins--ttl', key: dataRecipes.uuid + "_data_ins--ttl" },
+                                    "Directions"
+                                )
+                            ]
+                        )
+                    ]
+                )
+            ])
+    });
+
+    rootDetail.render(e(
+        'ul',
+        { className: 'rcp__detail' },
+        this.listInfo
+    ))
+};
+
+const fetchSpecials = (dataRecipes) => {
+    return fetch("http://localhost:3001/specials")
+        .then((response) => response.json())
+        .then((data) => processData(dataRecipes, data))};
+
+const fetchRecipes = () => {
+    return fetch("http://localhost:3001/recipes")
+          .then((response) => response.json())
+          .then((data) => fetchSpecials(data))};
+
+    fetchRecipes();
+
+
+
+
+
+
+
+        
+
+
+
+
+
 var data;
 
 $.ajax({
@@ -63,12 +221,9 @@ $.ajax({
         url: "http://localhost:3001/specials",
         context: document.body
     }).done(function(result) {
-        console.log(result);
-
         $('li[data-id]').each(function(){
             var ctrObj = $(this);
             var ctrID = $(this).attr('data-id');
-            console.log($(this).attr('data-id'));
 
             jQuery.each( result, function( ctr, val ) {
                 if(val.ingredientId == ctrID){
@@ -89,3 +244,5 @@ $("main").on("click",".rcp__detail--close, .overlay", function(){
     $(".overlay").fadeOut();
     $(".rcp__detail .rcp__detail--item").fadeOut();
 });
+
+
