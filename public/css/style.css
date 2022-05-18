@@ -156,6 +156,9 @@ main {
 .rcp__text--legend:last-child {
     margin-bottom: 0;
 }
+.rcp__ing--legend span {
+    display: block;
+}
 .rcp__col {
     display: flex;
     justify-content: space-between;
