@@ -39,6 +39,96 @@ const processData = (dataRecipes, dataSpecials) => {
     ))
 
     this.listInfo = dataRecipes.map(dataRecipes => {
+        let ctrIngredients = dataRecipes.ingredients.map(dataIngredients => {
+            if((dataIngredients.amount != "" && dataIngredients.amount != null) && (dataIngredients.measurement != "" && dataIngredients.measurement != null)){
+                return e(
+                    'li',
+                    { key: dataIngredients.uuid },
+                    [
+                        e(
+                            'p',
+                            { className: 'rcp__ing--legend', key: dataIngredients.uuid + "_ing01" },
+                            "name : " + dataIngredients.name
+                        ),
+                        e(
+                            'p',
+                            { className: 'rcp__ing--legend', key: dataIngredients.uuid + "_ing02" },
+                            "amount : " + dataIngredients.amount
+                        ),
+                        e(
+                            'p',
+                            { className: 'rcp__ing--legend', key: dataIngredients.uuid + "_ing03" },
+                            "measurement : " + dataIngredients.measurement
+                        )
+                    ]
+                )
+            }else if(!(dataIngredients.amount != "" && dataIngredients.amount != null) && (dataIngredients.measurement != "" && dataIngredients.measurement != null)){
+                return e(
+                    'li',
+                    { key: dataIngredients.uuid },
+                    [
+                        e(
+                            'p',
+                            { className: 'rcp__ing--legend', key: dataIngredients.uuid + "_ing01" },
+                            "name : " + dataIngredients.name
+                        ),
+                        e(
+                            'p',
+                            { className: 'rcp__ing--legend', key: dataIngredients.uuid + "_ing03" },
+                            "measurement : " + dataIngredients.measurement
+                        )
+                    ]
+                )
+            }else if((dataIngredients.amount != "" && dataIngredients.amount != null) && !(dataIngredients.measurement != "" && dataIngredients.measurement != null)){
+                return e(
+                    'li',
+                    { key: dataIngredients.uuid },
+                    [
+                        e(
+                            'p',
+                            { className: 'rcp__ing--legend', key: dataIngredients.uuid + "_ing01" },
+                            "name : " + dataIngredients.name
+                        ),
+                        e(
+                            'p',
+                            { className: 'rcp__ing--legend', key: dataIngredients.uuid + "_ing02" },
+                            "amount : " + dataIngredients.amount
+                        )
+                    ]
+                )
+            }else {
+                return e(
+                    'li',
+                    { key: dataIngredients.uuid },
+                    [
+                        e(
+                            'p',
+                            { className: 'rcp__ing--legend', key: dataIngredients.uuid + "_ing01" },
+                            "name : " + dataIngredients.name
+                        )
+                    ]
+                )
+            }
+        });
+
+        let ctr = 0;
+        let ctrInstruction = dataRecipes.directions.map(dataInstruction => {
+            ctr++;
+            if (dataInstruction.optional) {
+                return e(
+                    'li',
+                    { key: dataRecipes.uuid + "_ins" + ctr },
+                    ctr + ". ( optional ) " + dataInstruction.instructions
+                )
+            } else {
+                return e(
+                    'li',
+                    { key: dataRecipes.uuid + "_ins" + ctr },
+                    ctr + ". " + dataInstruction.instructions
+                )
+            }
+        });
+
         return e(
             'li',
             { className: 'rcp__detail--item', key: dataRecipes.uuid + "_data" },
@@ -106,6 +196,11 @@ const processData = (dataRecipes, dataSpecials) => {
                                     'p',
                                     { className: 'rcp__ing--ttl', key: dataRecipes.uuid + "_data_ing--ttl" },
                                     "Ingredients"
+                                ),
+                                e(
+                                    'ul',
+                                    { key: dataRecipes.uuid + "_data_ing--ul" },
+                                    ctrIngredients
                                 )
                             ]
                         ),
@@ -117,6 +212,11 @@ const processData = (dataRecipes, dataSpecials) => {
                                     'p',
                                     { className: 'rcp__ins--ttl', key: dataRecipes.uuid + "_data_ins--ttl" },
                                     "Directions"
+                                ),
+                                e(
+                                    'ul',
+                                    { key: dataRecipes.uuid + "_data_ins--ul" },
+                                    ctrInstruction
                                 )
                             ]
                         )
@@ -244,5 +344,3 @@ $("main").on("click",".rcp__detail--close, .overlay", function(){
     $(".overlay").fadeOut();
     $(".rcp__detail .rcp__detail--item").fadeOut();
 });
-
-
