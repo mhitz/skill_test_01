@@ -8,13 +8,11 @@ const rootDetail = ReactDOM.createRoot(domDetail);
 
 const processData = (dataRecipes, dataSpecials) => {
 
-    let ctr = -1;
     this.listItems = dataRecipes.map(dataRecipes => {
-        ctr ++;
         return e(
             'li',
-            { key: dataRecipes.uuid, onClick: () => {
-                
+            { key: dataRecipes.uuid, onClick: (e) => {
+                console.log(e);
             }},
             [
                 e(
@@ -272,7 +270,6 @@ const fetchRecipes = () => {
 
     fetchRecipes();
 
-    
 $("main").on("click",".rcp__list li", function(){
     $(".rcp__detail").find(".rcp__detail--item").eq($(this).index()).fadeIn();
     $( ".overlay" ).fadeIn();
